@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import "./App.css";
 
-import { addUser, deleteUser, updateUsername } from './features/Users';
+import { addUser, deleteUser, updateUserById } from './redux/userSlice'
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
   const [newUsername, setNewUsername] = useState("");
 
   const dispatch = useDispatch();
-  const userList = useSelector((state) => state.users.value);
+  const userList = useSelector((state) => state.users.users);
 
   return (
     <div className="App">
@@ -27,7 +27,7 @@ function App() {
               <h2>{user.name}</h2>
               <h3>{user.username}</h3>
               <input type='text' placeholder='New Username' onChange={(event)=>{setNewUsername(event.target.value)}}/>
-              <button onClick={()=>dispatch(updateUsername({id: user.id, username: newUsername}))}>Update Username</button>
+              <button onClick={()=>dispatch(updateUserById({id: user.id, username: newUsername}))}>Update Username</button>
               <button onClick={()=>dispatch(deleteUser({id: user.id}))}>Delete User</button>
             </div>
           })
